@@ -1,0 +1,127 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "created_at": "2026-04-12T11:45:16.322Z",
+        "updated_at": "2026-04-12T11:45:16.322Z",
+        "name": "Овощи",
+        "description": "Не фрукт"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "created_at": "2026-04-12T11:57:59.344Z",
+        "updated_at": "2026-04-12T11:57:59.344Z",
+        "name": "Овощи",
+        "description": "Не фрукт"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "created_at": "2026-04-12T11:59:29.383Z",
+        "updated_at": "2026-04-12T11:59:29.383Z",
+        "name": "Овощи",
+        "description": "Свежие овощи"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+        "created_at": "2026-04-12T12:04:31.292Z",
+        "updated_at": "2026-04-12T12:04:31.292Z",
+        "name": "Фрукты",
+        "description": "Свежие фрукты"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+        "created_at": "2026-04-12T12:23:38.368Z",
+        "updated_at": "2026-04-12T12:23:38.368Z",
+        "name": "Фрукты",
+        "description": "Свежие фрукты"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 8,
+    "fields": {
+        "created_at": "2026-04-12T12:24:00.838Z",
+        "updated_at": "2026-04-12T12:24:00.838Z",
+        "name": "Фрукты",
+        "description": "Свежие фрукты"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+        "created_at": "2026-04-12T12:03:33.828Z",
+        "updated_at": "2026-04-12T12:03:33.828Z",
+        "name": "Помидор",
+        "description": "Овощ",
+        "image": "",
+        "category": 5,
+        "price": "50.00"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+        "created_at": "2026-04-12T12:03:57.517Z",
+        "updated_at": "2026-04-12T12:03:57.517Z",
+        "name": "Свекла",
+        "description": "Овощ",
+        "image": "",
+        "category": 5,
+        "price": "50.00"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+        "created_at": "2026-04-12T12:05:14.016Z",
+        "updated_at": "2026-04-12T12:05:14.016Z",
+        "name": "Бананы",
+        "description": "Фрукт",
+        "image": "",
+        "category": 6,
+        "price": "100.00"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+        "created_at": "2026-04-12T12:05:33.067Z",
+        "updated_at": "2026-04-12T12:05:33.067Z",
+        "name": "Манго",
+        "description": "Фрукт",
+        "image": "",
+        "category": 6,
+        "price": "110.00"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+        "created_at": "2026-04-12T12:05:51.374Z",
+        "updated_at": "2026-04-12T12:05:51.374Z",
+        "name": "Киви",
+        "description": "Фрукт",
+        "image": "",
+        "category": 6,
+        "price": "150.00"
+    }
+}
+]
