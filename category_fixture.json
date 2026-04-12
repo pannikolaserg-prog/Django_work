@@ -1,0 +1,62 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "created_at": "2026-04-12T11:45:16.322Z",
+        "updated_at": "2026-04-12T11:45:16.322Z",
+        "name": "Овощи",
+        "description": "Не фрукт"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "created_at": "2026-04-12T11:57:59.344Z",
+        "updated_at": "2026-04-12T11:57:59.344Z",
+        "name": "Овощи",
+        "description": "Не фрукт"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "created_at": "2026-04-12T11:59:29.383Z",
+        "updated_at": "2026-04-12T11:59:29.383Z",
+        "name": "Овощи",
+        "description": "Свежие овощи"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+        "created_at": "2026-04-12T12:04:31.292Z",
+        "updated_at": "2026-04-12T12:04:31.292Z",
+        "name": "Фрукты",
+        "description": "Свежие фрукты"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+        "created_at": "2026-04-12T12:23:38.368Z",
+        "updated_at": "2026-04-12T12:23:38.368Z",
+        "name": "Фрукты",
+        "description": "Свежие фрукты"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 8,
+    "fields": {
+        "created_at": "2026-04-12T12:24:00.838Z",
+        "updated_at": "2026-04-12T12:24:00.838Z",
+        "name": "Фрукты",
+        "description": "Свежие фрукты"
+    }
+}
+]
