@@ -1,7 +1,10 @@
+from itertools import product
+
 from django.contrib import messages
 from django.shortcuts import render
 
 from .forms import ContactForm
+from .models import Product
 
 
 def home(request):
@@ -22,5 +25,8 @@ def contacts(request):
     return render(request, "contacts.html", {"form": form})
 
 
-def index(request):
-    return render(request, "base.html")
+def product_list(request):
+    products = Product.objects.all()
+    context = {"products": products}
+
+    return render(request, "products_list.html", context)
