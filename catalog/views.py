@@ -20,3 +20,7 @@ def contacts(request):
         form = ContactForm()
 
     return render(request, "contacts.html", {"form": form})
+
+
+def index(request):
+    return render(request, "base.html")
