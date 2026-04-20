@@ -8,14 +8,24 @@
                 <h2 class="display-5">{{ product.name|default:"Ещё один заголовок" }}</h2>
                 <p class="lead">{{ product.description|default:"И ещё более остроумный подзаголовок" }}</p>
             </div>
+
             {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 30%; height: 100px; object-fit: cover; border-radius: 21px 21px 0 0;">
-                <div class="card-body">
-                    <p class="card-text">{{ product.name }}</p>
-                </div>
+                <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}" style="width: 60%; object-fit: cover;">
             {% else %}
-                <div class="bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+                <div class="bg-body-tertiary shadow-sm mx-auto d-flex align-items-center justify-content-center" style="width: 60%; height: 150px; border-radius: 21px 21px 0 0;">
+                    <span class="text-muted">Нет изображения</span>
+                </div>
             {% endif %}
+
+            <!-- Кнопка под картинкой (всегда видна) -->
+            <div class="card-body">
+                <p class="card-text">{{ product.name }}</p>
+                <div class="d-flex gap-3 mt-4 justify-content-center">
+                    <a href="{% url 'catalog:products_detail' product.pk %}" class="btn btn-primary">
+                        Узнать больше
+                    </a>
+                </div>
+            </div>
         </div>
         {% empty %}
         <div class="text-center p-5">
