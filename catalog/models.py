@@ -25,7 +25,7 @@ class Category(TimeStampedModel):  # ✅ Теперь у категории то
         return self.name
 
 
-class Product(TimeStampedModel):  # ✅ У продукта тоже есть время
+class Product(TimeStampedModel):
     name = models.CharField(max_length=50, verbose_name="Наименование")
     description = models.CharField(max_length=100, verbose_name="Описание")
     image = models.ImageField(upload_to="product/photo", blank=True, null=True)

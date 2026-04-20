@@ -72,3 +72,10 @@
     flex: 1;
   }
 }
+
+.product-image {
+    width: 80%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 21px 21px 0 0;
+}
