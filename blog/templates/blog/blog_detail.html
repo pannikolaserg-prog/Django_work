@@ -1,0 +1,44 @@
+{% extends 'products/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <article>
+        <div class="d-flex justify-content-between align-items-start mb-4">
+            <h1>{{ post.name }}</h1>
+            {% if user.is_staff %}
+            <div>
+                <a href="{% url 'blog:blog_update' post.pk %}" class="btn btn-warning">Редактировать</a>
+                <a href="{% url 'blog:blog_delete' post.pk %}" class="btn btn-danger">Удалить</a>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="mb-3">
+            <span class="badge {% if post.is_published %}bg-success{% else %}bg-secondary{% endif %}">
+                {% if post.is_published %}Опубликовано{% else %}Черновик{% endif %}
+            </span>
+            <small class="text-muted ms-3">
+                👁️ {{ post.views_count }} просмотров | 
+                📅 Создано: {{ post.created_at|date:"d.m.Y H:i" }}
+            </small>
+            {% if post.updated_at != post.created_at %}
+            <small class="text-muted ms-3">Обновлено: {{ post.updated_at|date:"d.m.Y H:i" }}</small>
+            {% endif %}
+        </div>
+
+        {% if post.preview %}
+        <div class="text-center mb-4">
+            <img src="{{ post.preview.url }}" class="img-fluid rounded" alt="{{ post.name }}" style="max-height: 400px;">
+        </div>
+        {% endif %}
+
+        <div class="content">
+            {{ post.description|linebreaks }}
+        </div>
+
+        <div class="mt-4">
+            <a href="{% url 'blog:blog_list' %}" class="btn btn-secondary">← Назад к списку</a>
+        </div>
+    </article>
+</div>
+{% endblock %}
