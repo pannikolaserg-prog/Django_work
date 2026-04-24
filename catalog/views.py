@@ -1,37 +1,29 @@
-from itertools import product
-
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404
-
+from django.views.generic import ListView, DetailView, TemplateView, FormView
+from django.urls import reverse_lazy
 from .forms import ContactForm
 from .models import Product
 
 
-def home(request):
-    return render(request, "home.html")
+class HomeView(TemplateView):
+    template_name = "products/home.html"
 
 
-def contacts(request):
-    if request.method == "POST":
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            # Данные успешно получены
-            name = form.cleaned_data["name"]
-            messages.success(request, f"{name}, ваше сообщение отправлено!")
-            form = ContactForm()  # Очищаем форму
-    else:
-        form = ContactForm()
+class ContactView(FormView):
+    template_name = "products/contacts.html"
+    form_class = ContactForm
+    success_url = reverse_lazy("catalog:contacts")
 
-    return render(request, "contacts.html", {"form": form})
+    def form_valid(self, form):
+        messages.success(self.request, f"{form.cleaned_data['name']}, ваше сообщение отправлено!")
+        return super().form_valid(form)
 
 
-def product_list(request):
-    products = Product.objects.all()
-    context = {"products": products}
+class ProductListView(ListView):
+    model = Product
+    template_name = "products/product_list.html"
 
-    return render(request, "products_list.html", context)
 
-def products_detail(request, pk):
-    product =get_object_or_404(Product, pk=pk)
-    context = {"product": product}
-    return render(request, "products_detail.html", context)
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = "products/product_detail.html"
