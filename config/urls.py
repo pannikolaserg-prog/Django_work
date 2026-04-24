@@ -6,8 +6,10 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('catalog.urls')),
+    path('blog/', include('blog.urls')),
 ]
 
 # Добавляем маршруты для медиафайлов ТОЛЬКО в режиме DEBUG
 if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
