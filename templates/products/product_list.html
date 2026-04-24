@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'products/base.html' %}
 {% load my_tags %}
 {% block content %}
     <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-        {% for product in products %}
+        {% for product in object_list %}
         <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
             <div class="my-3 py-3">
                 <h2 class="display-5">{{ product.name|default:"Ещё один заголовок" }}</h2>
@@ -21,7 +21,7 @@
             <div class="card-body">
                 <p class="card-text">{{ product.name }}</p>
                 <div class="d-flex gap-3 mt-4 justify-content-center">
-                    <a href="{% url 'catalog:products_detail' product.pk %}" class="btn btn-primary">
+                    <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-primary">
                         Узнать больше
                     </a>
                 </div>
