@@ -1,6 +1,8 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 from .models import MyBlog
 from .forms import MyBlogForm
 
@@ -28,11 +30,56 @@ class BlogDetailView(DetailView):
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
-        # Увеличиваем счетчик просмотров только для опубликованных записей
+
         if obj.is_published or self.request.user.is_staff:
+            # Сохраняем старое значение просмотров
+            old_views = obj.views_count
+
+            # Увеличиваем счетчик
             obj.views_count += 1
             obj.save()
+
+            # Проверяем, достигло ли число просмотров 100
+            # и не отправляли ли уже поздравление
+            if obj.views_count >= 100 and not obj.congratulation_sent:
+                self.send_congratulation_email(obj)
+                obj.congratulation_sent = True
+                obj.save()
+
         return obj
+
+    def send_congratulation_email(self, post):
+        """Отправка поздравления на почту"""
+        subject = f'🎉 Поздравление! Статья "{post.name}" достигла 100 просмотров!'
+
+        message = f'''
+        Здравствуйте!
+
+        Поздравляем! Ваша статья "{post.name}" достигла {post.views_count} просмотров!
+
+        Детали статьи:
+        - Заголовок: {post.name}
+        - Просмотров: {post.views_count}
+        - Ссылка: http://127.0.0.1:8000{post.get_absolute_url()}
+        - Дата создания: {post.created_at}
+
+        Продолжайте в том же духе! 🚀
+
+        С уважением,
+        Ваш сайт
+        '''
+
+        try:
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=['your_email@gmail.com'],  # замените на свой email
+                fail_silently=False,
+            )
+            print(f"Поздравление отправлено для статьи '{post.name}'")
+        except Exception as e:
+            print(f"Ошибка при отправке письма: {e}")
 
 
 class BlogCreateView(CreateView):
@@ -57,18 +104,17 @@ class BlogUpdateView(UpdateView):
     model = MyBlog
     form_class = MyBlogForm
     template_name = "blog/blog_form.html"
+    success_url = reverse_lazy('blog:blog_list')  # ❌ СТАРОЕ (на список)
+
+    # Нужно изменить на динамический URL:
+    def get_success_url(self):
+        """После успешного редактирования перенаправляем на страницу статьи"""
+        return reverse_lazy('blog:blog_detail', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         response = super().form_valid(form)
         messages.success(self.request, f'Запись "{form.instance.name}" успешно обновлена!')
         return response
-
-    def form_invalid(self, form):
-        messages.error(self.request, 'Пожалуйста, исправьте ошибки в форме.')
-        return super().form_invalid(form)
-
-    def get_success_url(self):
-        return reverse_lazy('blog:blog_detail', kwargs={'pk': self.object.pk})
 
 
 class BlogDeleteView(DeleteView):
