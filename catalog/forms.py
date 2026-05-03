@@ -21,7 +21,7 @@ FORBIDDEN_WORDS = ['казино', 'криптовалюта', 'крипта', '
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'image']
+        fields = ['name', 'description', 'price', 'image', 'category']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
