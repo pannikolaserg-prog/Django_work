@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if object %}Редактировать{% else %}Добавить{% endif %} товар</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        .form-control { width: 100%; max-width: 400px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .form-control-file { padding: 8px 0; }
+        .error { color: red; font-size: 14px; margin-top: 5px; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .cancel { background: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-left: 10px; }
+        .cancel:hover { background: #5a6268; }
+        .messages { margin-bottom: 20px; }
+        .success { color: green; }
+        .errorlist { color: red; list-style: none; padding: 0; }
+    </style>
+</head>
+<body>
+    <h1>{% if object %}Редактирование{% else %}Добавление{% endif %} товара</h1>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <div class="error">
+                    {% for error in field.errors %}
+                        {{ error }}<br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if field.help_text %}
+                <small class="help-text">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <button type="submit">Сохранить</button>
+        <a href="{% url 'catalog:product_list' %}" class="cancel">Отмена</a>
+    </form>
+</body>
+</html>
