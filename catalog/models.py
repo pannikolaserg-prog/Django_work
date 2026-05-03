@@ -28,9 +28,9 @@ class Category(TimeStampedModel):  # ✅ Теперь у категории то
 class Product(TimeStampedModel):
     name = models.CharField(max_length=50, verbose_name="Наименование")
     description = models.CharField(max_length=100, verbose_name="Описание")
-    image = models.ImageField(upload_to="product/photo", blank=True, null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.ImageField(upload_to="product/photo", blank=True, null=True, verbose_name="Изображение")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Категория")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
 
     class Meta:
         verbose_name = "Товар"
