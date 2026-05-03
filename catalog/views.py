@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, TemplateView, FormView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import ContactForm
 from .models import Product
@@ -27,3 +28,9 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
     template_name = "products/product_detail.html"
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ['name', 'description', 'price']
+    template_name = "products/product_form.html"
+    success_url = reverse_lazy('catalog:product_list" ')
