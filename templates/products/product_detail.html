@@ -1,4 +1,4 @@
-{% extends 'products/base.html' %}
+{% extends 'base.html' %}
 {% load my_tags %}
 {% block content %}
 <div class="container py-4">
@@ -13,10 +13,10 @@
             {% endif %}
         </div>
         <div class="col-md-6">
-            <h1 class="display-5">{{ object.name }}</h1>
-            <p class="lead">{{ object.description }}</p>
-            <p class="h3 text-primary">{{ object.price }} ₽</p>
-            <p class="text-muted">Категория: {{object.category }}</p>
+            <h1 class="display-5">{{ product.name }}</h1>
+            <p class="lead">{{ product.description|truncatechars:100 }}</p>
+            <p class="h3 text-primary">{{ product.price }} ₽</p>
+            <p class="text-muted">Категория: {{product.category }}</p>
 
             <div class="d-flex gap-3 mt-4">
                 <button class="btn btn-primary btn-lg">Добавить в корзину</button>
