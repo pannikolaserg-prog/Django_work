@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
@@ -16,7 +15,6 @@ SECRET_KEY = 'django-insecure-7)3p(jp@#%qqo%nas1&f9bb+m8wa#08bx^8v%^h_#h@h2bkq_w
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -61,7 +59,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 load_dotenv()
 DATABASES = {
     "default": {
@@ -74,10 +71,7 @@ DATABASES = {
     }
 }
 
-
 # Password validation
-# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -94,33 +88,32 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/6.0/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'ru-ru'  # Измените на русский
+TIME_ZONE = 'Europe/Moscow'  # Измените на ваш часовой пояс
 USE_I18N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
 STATIC_URL = 'static/'
-
 STATICFILES_DIRS = (BASE_DIR / 'static',)
-
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = 'media/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Для разработки - выводим письма в консоль
+# Кастомная модель пользователя
+AUTH_USER_MODEL = 'users.User'
+
+# Настройки аутентификации
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'catalog:product_list'
+LOGOUT_REDIRECT_URL = 'users:login'
+
+# Настройки почты
 if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+    # Для разработки - письма выводятся в консоль
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'noreply@example.com'
 else:
     # Для продакшена - настоящая отправка
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -130,5 +123,3 @@ else:
     EMAIL_HOST_USER = 'your_email@gmail.com'
     EMAIL_HOST_PASSWORD = 'your_app_password'
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-AUTH_USER_MODEL = 'users.User'

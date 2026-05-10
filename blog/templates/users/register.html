@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .container { max-width: 500px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        .form-control { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        .error { color: red; font-size: 14px; margin-top: 5px; }
+        .messages { margin-bottom: 20px; }
+        .success { color: green; }
+        .warning { color: orange; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="error">
+                        {% for error in field.errors %}
+                            {{ error }}<br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+
+        <p style="margin-top: 20px;">Уже есть аккаунт? <a href="{% url 'users:login' %}">Войти</a></p>
+    </div>
+</body>
+</html>
