@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('catalog.urls')),
     path('blogs/', include('blog.urls')),
+    path('users/', include('users.urls')),
 ]
 
 # Добавляем маршруты для медиафайлов ТОЛЬКО в режиме DEBUG
