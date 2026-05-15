@@ -9,12 +9,34 @@
                 <p class="lead">{{ product.description|default:"И ещё более остроумный подзаголовок" }}</p>
             </div>
 
+            <!-- Статус публикации -->
+            {% if not product.is_published %}
+                <span class="badge bg-warning">На модерации</span>
+            {% endif %}
+
             {% if product.image %}
                 <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}" style="width: 60%; object-fit: cover;">
             {% else %}
                 <div class="bg-body-tertiary shadow-sm mx-auto d-flex align-items-center justify-content-center" style="width: 60%; height: 150px; border-radius: 21px 21px 0 0;">
                     <span class="text-muted">Нет изображения</span>
                 </div>
+            {% endif %}
+
+            <!-- Кнопка редактирования (только для владельца) -->
+            {% if user == product.owner %}
+                <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-warning btn-sm">Редактировать</a>
+            {% endif %}
+
+            <!-- Кнопка удаления (владелец ИЛИ модератор) -->
+            {% if user == product.owner or perms.catalog.can_unpublish_product %}
+                <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger btn-sm">Удалить</a>
+            {% endif %}
+
+            <!-- Кнопка публикации (только модератор) -->
+            {% if perms.catalog.can_unpublish_product %}
+                <a href="{% url 'catalog:product_publish_toggle' product.pk %}" class="btn btn-secondary btn-sm">
+            {% if product.is_published %}Снять с публикации{% else %}Опубликовать{% endif %}
+                </a>
             {% endif %}
 
             <!-- Кнопка под картинкой (всегда видна) -->
