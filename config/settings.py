@@ -3,7 +3,6 @@ from pathlib import Path
 
 from django.conf.global_settings import CACHES
 from dotenv import load_dotenv
-from executing import cache
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -127,12 +126,11 @@ else:
     EMAIL_HOST_PASSWORD = 'your_app_password'
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-CACHE_ANABLED =  True
-if CACHE_ANABLED:
-    {
+CACHE_ENABLED =  True
+if CACHE_ENABLED:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.redis.RedisCache',
             'LOCATION': 'redis://127.0.0.1:6379/1',
+        }
     }
-}
