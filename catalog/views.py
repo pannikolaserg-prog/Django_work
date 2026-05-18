@@ -7,7 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin  # Добавьте д
 from .forms import ContactForm, ProductForm
 from .models import Product
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.exceptions import PermissionDenied
+
+from .services import get_products_from_cache
 
 
 class HomeView(TemplateView):
@@ -28,6 +29,9 @@ class ProductListView(ListView):
     model = Product
     template_name = "products/product_list.html"
     context_object_name = "products"
+
+    def get_queryset(self):
+        return get_products_from_cache()
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):  # 🔥 Добавлен LoginRequiredMixin
