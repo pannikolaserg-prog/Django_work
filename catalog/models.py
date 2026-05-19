@@ -17,6 +17,7 @@ class TimeStampedModel(models.Model):
 
 
 class Category(TimeStampedModel):  # ✅ Теперь у категории тоже есть время
+    objects = None
     name = models.CharField(max_length=50, verbose_name="Наименование")
     description = models.CharField(max_length=100, verbose_name="Описание")
 
@@ -29,6 +30,7 @@ class Category(TimeStampedModel):  # ✅ Теперь у категории то
 
 
 class Product(TimeStampedModel):
+    objects = None
     name = models.CharField(max_length=50, verbose_name="Наименование")
     description = models.CharField(max_length=100, verbose_name="Описание")
     image = models.ImageField(upload_to="product/photo", blank=True, null=True, verbose_name="Изображение")
